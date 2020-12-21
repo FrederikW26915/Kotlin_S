@@ -35,6 +35,15 @@ class LoginActivity : AppCompatActivity() {
 
         this.spinner = findViewById(R.id.spinner)
         this.spinner?.let { it.visibility = View.GONE }
+
+
+
+        /** For testing only -  Remove input before pushing to git **/
+        var emai: CharSequence? = ""
+        this.emailText?.setText(emai)
+
+        var pass: CharSequence? = ""
+        this.passText?.setText(pass)
     }
 
 
@@ -56,9 +65,6 @@ class LoginActivity : AppCompatActivity() {
 
         val emailString = this.emailText?.text.toString()
         val passString = this.passText?.text.toString()
-
-
-
 
         try {
 

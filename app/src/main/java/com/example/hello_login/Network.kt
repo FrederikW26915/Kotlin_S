@@ -31,7 +31,7 @@ typealias NetworkCallback = (String) -> Unit
 
 object Network {
 
-    var token = "";
+    var token = ""
 
     private val client = ServiceBuilder.client
 
@@ -68,11 +68,11 @@ object Network {
                         val reply = Gson().fromJson<Reply>(rJson, Reply::class.java)
 
                         if (reply.success == true){
-                            Log.e("hej", "true")
+                            //Log.e("hej", "true")
                             token = reply.data?.token.toString()
                             onComplete(reply.toString())
-                            Log.e("hej", token)
-                            Log.e("hej", "true2")
+                            //Log.e("hej", token)
+                            //Log.e("hej", "true2")
                         } else {
                             onError("Wrong login or password")
                         }
@@ -90,15 +90,18 @@ object Network {
     }
 
     fun search(
-        text: String
-        /*,
+        text: String,
         onComplete: NetworkCallback,
-        onError: NetworkCallback*/
+        onError: NetworkCallback
     ) {
 
         //val payload = text
 
+        Log.e("hej", "text: " + text)
+
         val json = Gson().toJson(text)
+
+        Log.e("hej", "json: " + json)
 
         val mediaType = "application/json; charset=utf-8".toMediaType()
 
@@ -125,10 +128,10 @@ object Network {
 
                         if (reply.success == true){
                             Log.e("hej", "true")
-                            //onComplete(reply.toString())
+                            onComplete(json + " " + reply.toString())
                         } else {
                             Log.e("hej", "false")
-                            //onError("Wrong login or password")
+                            onError("Something went wrong")
                         }
 
                     }
@@ -138,7 +141,7 @@ object Network {
                     }
 
                 } else {
-                    //onError("Wrong login or password")
+                    onError("Something went wrong")
                 }
             }
         })

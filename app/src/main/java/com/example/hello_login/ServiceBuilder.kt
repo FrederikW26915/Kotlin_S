@@ -38,7 +38,7 @@ data class DataSearch(
 
 data class ReplySearch(
     @SerializedName("success") val success: Boolean? = null,
-    @SerializedName("data") val data: DataSearch? = null,
+    @SerializedName("data") val data: List<DataSearch?>? = null,
     @SerializedName("messages") val messages: List<String?>? = null
 )
 
@@ -122,9 +122,10 @@ object ServiceBuilder {
 
         val logging = okhttp3.logging.HttpLoggingInterceptor()
         logging.level = okhttp3.logging.HttpLoggingInterceptor.Level.BODY
-        clientBuilder.addInterceptor(logging)
-        clientBuilder.addInterceptor(TokenInterceptor())
 
+        clientBuilder.addInterceptor(logging)
+
+        clientBuilder.addInterceptor(TokenInterceptor())
         clientBuilder.build()
     }
 }
